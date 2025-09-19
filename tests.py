@@ -1,12 +1,14 @@
-from functions.get_files_info import get_files_info
-from functions.get_file_content import get_file_content
+from functions.run_python_file import run_python_file
+
 
 def main():
     working_dir = "calculator"
-    #print(get_file_content(working_dir, "lorem.txt"))
-    print(get_file_content("calculator", "main.py"))
-    print(get_file_content("calculator", "pkg/calculator.py"))
-    print(get_file_content("calculator", "/bin/cat"))
-    print(get_file_content("calculator", "pkg/does_not_exist.py"))
+    print(f'(Test 1 - should print the calculator\'s usage instructions {run_python_file("calculator", "main.py")}')
+    print(f'(Test 2 - should run the calculator... which gives a kinda nasty rendered result) {run_python_file("calculator", "main.py", ["3 + 5"])}')
+    print(f'(Test 3 - Dunno what this does {run_python_file("calculator", "tests.py")}')
+    print(f'(Test 4 - this should return an error {run_python_file("calculator", "../main.py")}')
+    print(f'(Test 5 - this should return an error {run_python_file("calculator", "nonexistent.py")}')   
+
 
 main()
+
