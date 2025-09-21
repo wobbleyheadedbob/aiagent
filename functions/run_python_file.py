@@ -7,12 +7,12 @@ def run_python_file(working_directory: str, file_path: str, args=[]):
     
     #If the file_path is outside the working directory, return a string with an error:
     if not abs_file_path.startswith(abs_working_directory):
-        return f'Error: Cannot read "{file_path}" as it is outside the permitted working directory'
+        return f'Error: Cannot execute "{file_path}" as it is outside the permitted working directory'
     
     #If the file_path doesn't exist, return an error string:
     if not os.path.isfile(abs_file_path):
-        return f'Error: File not found or is not a regular file: "{file_path}"'
-    
+        return f'Error: File "{file_path}" not found.'
+
     #If the file doesn't end with ".py", return an error string:
     if not file_path.endswith(".py"):
         return f'Error: "{file_path}" is not a Python file.'
@@ -29,9 +29,9 @@ def run_python_file(working_directory: str, file_path: str, args=[]):
             capture_output=True
         )
         final_string = f"""
-    STDOUT: {output.stdout}
-    STDOUT: {output.stderr}
-    """
+STDOUT: {output.stdout}
+STDERR: {output.stderr}
+"""
         if output.stdout == "" and output.stderr == "":
             final_string = "No output produced.\n"
         if output.returncode != 0:
